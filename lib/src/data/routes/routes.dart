@@ -14,9 +14,11 @@ class Routes {
       final arg =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ChatDetails(
-          id: arg['id'],
-          firstName: arg['firstName'],
-          lastName: arg['lastName']);
+        id: arg['id'],
+        firstName: arg['firstName'],
+        lastName: arg['lastName'],
+        colors: arg['colors'],
+      );
     },
   };
 }
