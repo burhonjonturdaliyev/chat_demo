@@ -16,7 +16,7 @@ class AppTheme {
       secondary: _secondaryNeonYellow,
       tertiary: Color(0xFF2D2D2D),
       surface: Colors.white,
-      error: Colors.redAccent,
+      error: Color(0xff9DB7CB),
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
@@ -76,7 +76,7 @@ class AppTheme {
       secondary: _secondaryNeonYellow,
       tertiary: Colors.white,
       surface: Color(0xFF1E1E1E),
-      error: Colors.redAccent,
+      error: Color(0xff9DB7CB),
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: Color(0xFF121212),

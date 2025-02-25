@@ -87,7 +87,9 @@ flutter:
         - asset: assets/fonts/Gilroy.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
+    - family: GilroyBold
+      fonts:
+        - asset: assets/fonts/GilroyBold.ttf
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
