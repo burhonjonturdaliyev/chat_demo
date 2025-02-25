@@ -1,3 +1,4 @@
+import 'package:chat_demo/src/data/routes/routes.dart';
 import 'package:chat_demo/src/util/common/common_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,14 @@ class UserMessageContainer extends StatelessWidget {
     final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, RouteNames.chatDetail, arguments: {
+          'id': 1,
+          'firstName': 'Виктор',
+          'lastName': 'Власов',
+          'colors': Colors.red,
+        });
+      },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         padding: EdgeInsets.only(top: 10, bottom: 10, right: 12),
