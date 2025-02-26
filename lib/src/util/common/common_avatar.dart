@@ -12,13 +12,15 @@ class CommonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(firstName);
+    print(lastName);
     return Container(
       height: 50,
       width: 50,
       decoration: BoxDecoration(shape: BoxShape.circle, color: color),
       child: Center(
         child: Text(
-          '${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}',
+          '${firstName[0].toUpperCase()}${lastName.substring(0, 1).toUpperCase()}',
           style: TextStyle(
               fontFamily: "GilroyBold",
               color: Colors.white,

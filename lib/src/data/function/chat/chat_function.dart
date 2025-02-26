@@ -47,7 +47,7 @@ class ChatFunction {
     await database.insertUser(UsersCompanion(
       firstname: Value(firstname),
       lastname: Value(lastname),
-      lastMessage: Value("lastMessage"),
+      lastMessage: Value(""),
       timestamp: Value(DateTime.now()),
     ));
     await fetch();
