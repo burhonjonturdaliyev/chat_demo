@@ -1,3 +1,4 @@
+import 'package:chat_demo/src/util/chat/chat_bubble.dart';
 import 'package:chat_demo/src/util/common/common_appbar.dart';
 import 'package:chat_demo/src/util/common/common_divider.dart';
 import 'package:chat_demo/src/util/common/common_users_appbar.dart';
@@ -21,6 +22,26 @@ class ChatDetails extends StatefulWidget {
 }
 
 class _ChatDetailsState extends State<ChatDetails> {
+  final List<Map<String, dynamic>> messages = [
+    {
+      "text": "Hello",
+      "time": "20:00",
+      "isMe": true,
+      "imagePath": "assets/qiz.jpeg",
+    },
+    {"text": "How are you?", "time": "20:01", "isMe": true},
+    {
+      "text": "I'm fine!",
+      "time": "20:02",
+      "isMe": false,
+    },
+    {
+      "text": "Good to hear!",
+      "time": "20:03",
+      "isMe": true,
+      "imagePath": "assets/qiz.jpeg",
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -36,8 +57,25 @@ class _ChatDetailsState extends State<ChatDetails> {
         children: [
           CommonDivider(),
           Expanded(
-            child: ListView.builder(
-                itemCount: 20, itemBuilder: (context, index) => Text("data")),
+            child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(10),
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    final bool isMe = messages[index]["isMe"];
+                    final bool isLast = index == messages.length - 1 ||
+                        messages[index + 1]["isMe"] != isMe;
+
+                    return ChatBubble(
+                      message: messages[index]["text"],
+                      time: messages[index]["time"],
+                      imagePath: messages[index]["imagePath"],
+                      isMe: isMe,
+                      isLast: isLast, // Only last in group gets a tail
+                    );
+                  },
+                )),
           ),
         ],
       ),
