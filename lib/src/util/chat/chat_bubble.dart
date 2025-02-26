@@ -65,14 +65,14 @@ class ChatBubble extends StatelessWidget {
                       imagePath != null
                           ? Expanded(
                               child: Text(
-                                "dwef wef",
+                                message,
                                 style: TextStyle(
                                     color: theme.colorScheme.onSurface),
                               ),
                             )
                           : Flexible(
                               child: Text(
-                                "dwef wef",
+                                message,
                                 style: TextStyle(
                                     color: theme.colorScheme.onSurface),
                               ),
