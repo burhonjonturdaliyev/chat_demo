@@ -1,19 +1,31 @@
 import 'package:chat_demo/src/data/libruary/package_libruary.dart';
 
 class UserMessageContainer extends StatelessWidget {
-  const UserMessageContainer({super.key});
+  const UserMessageContainer(
+      {super.key,
+      required this.firstName,
+      required this.lastName,
+      required this.lastMessage,
+      required this.color,
+      required this.time});
+  final String firstName;
+  final String lastName;
+  final String lastMessage;
+  final Color color;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, RouteNames.chatDetail, arguments: {
           'id': 1,
-          'firstName': 'Виктор',
-          'lastName': 'Власов',
-          'colors': Colors.red,
+          'firstName': firstName,
+          'lastName': lastName,
+          'colors': color,
         });
       },
       child: Container(
@@ -31,7 +43,7 @@ class UserMessageContainer extends StatelessWidget {
         child: Row(
           children: [
             CommonAvatar(
-                color: Colors.red, firstName: "Виктор", lastName: "Власов"),
+                color: color, firstName: firstName, lastName: lastMessage),
             SizedBox(
               width: 12,
             ),
@@ -41,7 +53,7 @@ class UserMessageContainer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Виктор Власов",
+                    "$firstName $lastName",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -52,7 +64,7 @@ class UserMessageContainer extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Я готов",
+                    lastMessage,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -65,7 +77,7 @@ class UserMessageContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "12:00",
+                  time,
                   style: TextStyle(
                     color: theme.colorScheme.onSurface,
                     fontSize: 12,
