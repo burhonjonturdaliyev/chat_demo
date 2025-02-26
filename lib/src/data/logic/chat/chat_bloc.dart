@@ -1,8 +1,4 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
-import 'package:chat_demo/src/data/model/users/users_list_model.dart';
-import 'package:meta/meta.dart';
+import 'package:chat_demo/src/data/libruary/package_libruary.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';

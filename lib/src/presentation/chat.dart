@@ -1,9 +1,5 @@
-import 'package:chat_demo/src/data/const/const_values.dart';
-import 'package:chat_demo/src/util/common/common_appbar.dart';
-import 'package:chat_demo/src/util/common/common_divider.dart';
-import 'package:chat_demo/src/widget/container/search_container.dart';
-import 'package:chat_demo/src/widget/container/user_message_container.dart';
-import 'package:flutter/material.dart';
+import 'dart:developer';
+import 'package:chat_demo/src/data/libruary/package_libruary.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -13,6 +9,17 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
+  fetch() async {
+    final temp = await AppDatabase().getAllUsers();
+    log(temp.length.toString());
+  }
+
+  @override
+  void initState() {
+    fetch();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

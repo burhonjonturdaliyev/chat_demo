@@ -1,6 +1,4 @@
-import 'package:chat_demo/src/data/routes/routes.dart';
-import 'package:chat_demo/src/util/common/common_avatar.dart';
-import 'package:flutter/material.dart';
+import 'package:chat_demo/src/data/libruary/package_libruary.dart';
 
 class UserMessageContainer extends StatelessWidget {
   const UserMessageContainer({super.key});

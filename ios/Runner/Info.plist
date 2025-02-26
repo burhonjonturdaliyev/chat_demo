@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSDocumentsDirectoryUsageDescription</key>
+<string>We need access to store chat messages and images.</string>
+<key>NSFileProtectionCompleteUntilFirstUserAuthentication</key>
+<string></string>
 </dict>
 </plist>
