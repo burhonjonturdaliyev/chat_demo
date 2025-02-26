@@ -29,15 +29,21 @@ class SearchContainer extends StatelessWidget {
             SizedBox(
               width: 12,
             ),
-            Text(
-              ConstValues.search,
-              style: TextStyle(
-                color: theme.colorScheme.error,
-                fontSize: 16,
-                fontFamily: "Gilroy",
-                fontWeight: FontWeight.bold,
+            Expanded(
+                child: TextFormField(
+              maxLines: 1,
+              onTapOutside: (event) => FocusScope.of(context).unfocus(),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: ConstValues.search,
+                hintStyle: TextStyle(
+                  color: theme.colorScheme.error,
+                  fontSize: 16,
+                  fontFamily: "Gilroy",
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
+            )),
           ],
         ),
       ),
