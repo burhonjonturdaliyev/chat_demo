@@ -45,6 +45,7 @@ class UserCreateModal extends StatelessWidget {
                     context.read<ChatBloc>().add(ChatCreateEvent(
                         firstname: firstName.text.trim(),
                         lastname: lastName.text.trim()));
+                    Navigator.pop(context);
                   },
                   child: Text(ConstValues.add)))
         ],

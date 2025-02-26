@@ -1,7 +1,9 @@
 import 'package:chat_demo/src/data/libruary/package_libruary.dart';
+import 'package:chat_demo/src/data/logic/messaging/messaging_bloc.dart';
 
 class SendingMessageContainer extends StatelessWidget {
-  const SendingMessageContainer({super.key});
+  const SendingMessageContainer({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +15,18 @@ class SendingMessageContainer extends StatelessWidget {
         color: theme.colorScheme.secondary,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        children: [],
+      child: TextFormField(
+        controller: controller,
+        onChanged: (value) {
+          if (value.isNotEmpty) {
+            context.read<MessagingBloc>().add(MessagingSendEvent());
+          } else {
+            context.read<MessagingBloc>().add(MessagingMicEvent());
+          }
+        },
+        decoration: InputDecoration(
+            border: InputBorder.none, hintText: ConstValues.message),
+        onTapOutside: (event) => FocusScope.of(context).unfocus(),
       ),
     );
   }

@@ -42,6 +42,7 @@ class _ChatDetailsState extends State<ChatDetails> {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
+      resizeToAvoidBottomInset: false,
       appBar: CommonAppbar.withWidget(
           titles: CommonUsersAppbar(
               firstname: widget.firstName,
@@ -52,25 +53,31 @@ class _ChatDetailsState extends State<ChatDetails> {
         children: [
           CommonDivider(),
           Expanded(
-            child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(10),
-                  itemCount: messages.length,
-                  itemBuilder: (context, index) {
-                    final bool isMe = messages[index]["isMe"];
-                    final bool isLast = index == messages.length - 1 ||
-                        messages[index + 1]["isMe"] != isMe;
+            child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/image/back.jpg"),
+                      fit: BoxFit.fitWidth)),
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(10),
+                    itemCount: messages.length,
+                    itemBuilder: (context, index) {
+                      final bool isMe = messages[index]["isMe"];
+                      final bool isLast = index == messages.length - 1 ||
+                          messages[index + 1]["isMe"] != isMe;
 
-                    return ChatBubble(
-                      message: messages[index]["text"],
-                      time: messages[index]["time"],
-                      imagePath: messages[index]["imagePath"],
-                      isMe: isMe,
-                      isLast: isLast, // Only last in group gets a tail
-                    );
-                  },
-                )),
+                      return ChatBubble(
+                        message: messages[index]["text"],
+                        time: messages[index]["time"],
+                        imagePath: messages[index]["imagePath"],
+                        isMe: isMe,
+                        isLast: isLast, // Only last in group gets a tail
+                      );
+                    },
+                  )),
+            ),
           ),
         ],
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MicButton extends StatelessWidget {
-  const MicButton({super.key, required this.controller});
+class SendButton extends StatelessWidget {
+  const SendButton({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
@@ -17,8 +17,8 @@ class MicButton extends StatelessWidget {
       child: IconButton(
           onPressed: () {},
           icon: Icon(
-            CupertinoIcons.mic,
-            size: 24,
+            CupertinoIcons.paperplane,
+            size: 22,
             color: theme.colorScheme.onSurface,
           )),
     );
