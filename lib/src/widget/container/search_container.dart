@@ -1,5 +1,5 @@
+import 'package:chat_demo/src/data/libruary/package_libruary.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class SearchContainer extends StatelessWidget {
   const SearchContainer({super.key});
@@ -30,7 +30,7 @@ class SearchContainer extends StatelessWidget {
               width: 12,
             ),
             Text(
-              "Поиск",
+              ConstValues.search,
               style: TextStyle(
                 color: theme.colorScheme.error,
                 fontSize: 16,

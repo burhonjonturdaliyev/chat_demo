@@ -1,6 +1,4 @@
-import 'package:chat_demo/src/presentation/chat.dart';
-import 'package:chat_demo/src/presentation/chat_details.dart';
-import 'package:flutter/material.dart';
+import 'package:chat_demo/src/data/libruary/package_libruary.dart';
 
 class RouteNames {
   static const String chat = '/chat';

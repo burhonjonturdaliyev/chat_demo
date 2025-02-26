@@ -1,7 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/single_child_widget.dart';
 
-import '../logic/theme/theme_bloc.dart';
+import 'package:chat_demo/src/data/libruary/package_libruary.dart';
 
 class Providers {
   static final List<SingleChildWidget> providers = [
