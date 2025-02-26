@@ -39,11 +39,8 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
       const VerificationMeta('lastMessage');
   @override
   late final GeneratedColumn<String> lastMessage = GeneratedColumn<String>(
-      'last_message', aliasedName, false,
-      additionalChecks: GeneratedColumn.checkTextLength(
-          minTextLength: 1, maxTextLength: 1000),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
+      'last_message', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
   @override
@@ -85,8 +82,6 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
           _lastMessageMeta,
           lastMessage.isAcceptableOrUnknown(
               data['last_message']!, _lastMessageMeta));
-    } else if (isInserting) {
-      context.missing(_lastMessageMeta);
     }
     if (data.containsKey('timestamp')) {
       context.handle(_timestampMeta,
@@ -108,7 +103,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
       lastname: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}lastname'])!,
       lastMessage: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}last_message'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}last_message']),
       timestamp: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
     );
@@ -124,13 +119,13 @@ class User extends DataClass implements Insertable<User> {
   final int id;
   final String firstname;
   final String lastname;
-  final String lastMessage;
+  final String? lastMessage;
   final DateTime timestamp;
   const User(
       {required this.id,
       required this.firstname,
       required this.lastname,
-      required this.lastMessage,
+      this.lastMessage,
       required this.timestamp});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -138,7 +133,9 @@ class User extends DataClass implements Insertable<User> {
     map['id'] = Variable<int>(id);
     map['firstname'] = Variable<String>(firstname);
     map['lastname'] = Variable<String>(lastname);
-    map['last_message'] = Variable<String>(lastMessage);
+    if (!nullToAbsent || lastMessage != null) {
+      map['last_message'] = Variable<String>(lastMessage);
+    }
     map['timestamp'] = Variable<DateTime>(timestamp);
     return map;
   }
@@ -148,7 +145,9 @@ class User extends DataClass implements Insertable<User> {
       id: Value(id),
       firstname: Value(firstname),
       lastname: Value(lastname),
-      lastMessage: Value(lastMessage),
+      lastMessage: lastMessage == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastMessage),
       timestamp: Value(timestamp),
     );
   }
@@ -160,7 +159,7 @@ class User extends DataClass implements Insertable<User> {
       id: serializer.fromJson<int>(json['id']),
       firstname: serializer.fromJson<String>(json['firstname']),
       lastname: serializer.fromJson<String>(json['lastname']),
-      lastMessage: serializer.fromJson<String>(json['lastMessage']),
+      lastMessage: serializer.fromJson<String?>(json['lastMessage']),
       timestamp: serializer.fromJson<DateTime>(json['timestamp']),
     );
   }
@@ -171,7 +170,7 @@ class User extends DataClass implements Insertable<User> {
       'id': serializer.toJson<int>(id),
       'firstname': serializer.toJson<String>(firstname),
       'lastname': serializer.toJson<String>(lastname),
-      'lastMessage': serializer.toJson<String>(lastMessage),
+      'lastMessage': serializer.toJson<String?>(lastMessage),
       'timestamp': serializer.toJson<DateTime>(timestamp),
     };
   }
@@ -180,13 +179,13 @@ class User extends DataClass implements Insertable<User> {
           {int? id,
           String? firstname,
           String? lastname,
-          String? lastMessage,
+          Value<String?> lastMessage = const Value.absent(),
           DateTime? timestamp}) =>
       User(
         id: id ?? this.id,
         firstname: firstname ?? this.firstname,
         lastname: lastname ?? this.lastname,
-        lastMessage: lastMessage ?? this.lastMessage,
+        lastMessage: lastMessage.present ? lastMessage.value : this.lastMessage,
         timestamp: timestamp ?? this.timestamp,
       );
   User copyWithCompanion(UsersCompanion data) {
@@ -230,7 +229,7 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<int> id;
   final Value<String> firstname;
   final Value<String> lastname;
-  final Value<String> lastMessage;
+  final Value<String?> lastMessage;
   final Value<DateTime> timestamp;
   const UsersCompanion({
     this.id = const Value.absent(),
@@ -243,11 +242,10 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.id = const Value.absent(),
     required String firstname,
     required String lastname,
-    required String lastMessage,
+    this.lastMessage = const Value.absent(),
     this.timestamp = const Value.absent(),
   })  : firstname = Value(firstname),
-        lastname = Value(lastname),
-        lastMessage = Value(lastMessage);
+        lastname = Value(lastname);
   static Insertable<User> custom({
     Expression<int>? id,
     Expression<String>? firstname,
@@ -268,7 +266,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       {Value<int>? id,
       Value<String>? firstname,
       Value<String>? lastname,
-      Value<String>? lastMessage,
+      Value<String?>? lastMessage,
       Value<DateTime>? timestamp}) {
     return UsersCompanion(
       id: id ?? this.id,
@@ -669,14 +667,14 @@ typedef $$UsersTableCreateCompanionBuilder = UsersCompanion Function({
   Value<int> id,
   required String firstname,
   required String lastname,
-  required String lastMessage,
+  Value<String?> lastMessage,
   Value<DateTime> timestamp,
 });
 typedef $$UsersTableUpdateCompanionBuilder = UsersCompanion Function({
   Value<int> id,
   Value<String> firstname,
   Value<String> lastname,
-  Value<String> lastMessage,
+  Value<String?> lastMessage,
   Value<DateTime> timestamp,
 });
 
@@ -841,7 +839,7 @@ class $$UsersTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> firstname = const Value.absent(),
             Value<String> lastname = const Value.absent(),
-            Value<String> lastMessage = const Value.absent(),
+            Value<String?> lastMessage = const Value.absent(),
             Value<DateTime> timestamp = const Value.absent(),
           }) =>
               UsersCompanion(
@@ -855,7 +853,7 @@ class $$UsersTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required String firstname,
             required String lastname,
-            required String lastMessage,
+            Value<String?> lastMessage = const Value.absent(),
             Value<DateTime> timestamp = const Value.absent(),
           }) =>
               UsersCompanion.insert(
