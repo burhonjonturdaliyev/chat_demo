@@ -94,6 +94,8 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: assets/fonts/Gilroy.ttf
+        - asset: assets/fonts/GilroyBold.ttf
+          weight: 800
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
     - family: GilroyBold

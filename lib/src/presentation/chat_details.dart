@@ -37,6 +37,13 @@ class _ChatDetailsState extends State<ChatDetails> {
       "imagePath": "assets/qiz.jpeg",
     },
   ];
+
+  @override
+  void initState() {
+    context.read<ChatDetailBloc>().add(ChatDetailFetchEvent(id: widget.id));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
