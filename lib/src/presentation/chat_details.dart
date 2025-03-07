@@ -40,7 +40,7 @@ class _ChatDetailsState extends State<ChatDetails> {
 
   @override
   void initState() {
-    context.read<ChatDetailBloc>().add(ChatDetailFetchEvent(id: widget.id));
+    // context.read<ChatDetailBloc>().add(ChatDetailFetchEvent(id: widget.id));
     super.initState();
   }
 

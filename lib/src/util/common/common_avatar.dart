@@ -20,7 +20,7 @@ class CommonAvatar extends StatelessWidget {
       decoration: BoxDecoration(shape: BoxShape.circle, color: color),
       child: Center(
         child: Text(
-          '${firstName[0].toUpperCase()}${lastName.substring(0, 1).toUpperCase()}',
+          '${firstName.isNotEmpty ? firstName[0].toUpperCase() : ""}${lastName.isNotEmpty ? lastName[0].toUpperCase() : ""}',
           style: TextStyle(
               fontFamily: "GilroyBold",
               color: Colors.white,
